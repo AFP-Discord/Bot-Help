@@ -1,0 +1,28 @@
+{
+  "name": "afp95-bot",
+  "version": "1.0.0",
+  "description": "The Source Code for the Airforceproud95 Discord Bot",
+  "main": "bot.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/svalencia014/AFP95-Bot.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/svalencia014/AFP95-Bot/issues"
+  },
+  "homepage": "https://github.com/svalencia014/AFP95-Bot#readme",
+  "dependencies": {
+    "axios": "^0.24.0",
+    "discord.js": "^13.5.0",
+    "fs": "^0.0.1-security",
+    "mariadb": "^2.5.5",
+    "octokit": "^1.7.1",
+    "pm2": "^5.1.2",
+    "urllib": "^2.38.0"
+  }
+}
