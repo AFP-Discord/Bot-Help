@@ -5,7 +5,7 @@ const mariadb = require('mariadb');
 const pool = mariadb.createPool({
     host: '127.0.0.1',
     user:'root',
-    password: 'PASSWORD',
+    password: 'PASSWORD_HERE',
     connectionLimit: 50
 });
 
@@ -36,7 +36,8 @@ module.exports = {
                 const mainEmbed = new MessageEmbed()
                     .setColor('#3498DB')
                     .setTitle('VATSIM Roles')
-                    .setDescription('Here are the roles you were given:');
+                    .setDescription('Here are the roles you were given:')
+                    .setFooter(`CID Used: ${vatCID}`);
                 vatJSON = response;
                 vatDat = vatJSON.data;
 
@@ -93,26 +94,21 @@ module.exports = {
             let vatDB = vatCID.toString();
             const conn = await pool.getConnection();
             console.log('Connected To Pool');
-            const check = String('SELECT ' + vatCID + ' FROM discord.approved');
-            const res = await conn.query(check);
-            const tf = res.indexOf(vatCID);
-            console.log(res);
-            console.log(tf);
             //Console logs to verify values being written to DB
             console.log(memberTarget.user.id);
             console.log(vatCID);
-            const usedCID = conn.query("SELECT vatsim FROM discord.approved")
-            console.log(usedCID)
+            const usedCID = await conn.query("SELECT vatsim FROM discord.approved");
+            console.log(usedCID);
             await new Promise(resolve => setTimeout(resolve, 1000));
             if (usedCID == vatCID){
+                message.channel.send("That CID has already been used! Please try again!")
+                console.log("Duplicate CID used");
+            } else {
                 const req = String('INSERT INTO discord.approved (Discord, Vatsim) VALUES (' + memberTarget.user.id + ', ' + vatDB + ');');
                 console.log(req);
                 const added = await conn.query(req);
                 console.log(added);
                 giveRoles();
-            } else {
-                message.channel.send("That CID has already been used! Please try again!")
-                console.log("Duplicate CID used");
             }
         }
         if (isNaN(vatCID)) {

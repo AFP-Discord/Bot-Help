@@ -7,7 +7,7 @@ module.exports = {
     description: "This adds suggestions to the issue page on github",
     execute(message, args) {
 
-        const octokit = new Octokit({ auth: `OCTO_TOKEN` });
+        const octokit = new Octokit({ auth: `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` });
 
         octokit.rest.users.getAuthenticated();
 

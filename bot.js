@@ -41,4 +41,4 @@ client.on("message", (message) => {
   }
 
 });
-client.login('DISCORD_TOKEN');
+client.login('DISCORD_BOT_TOKEN_HERE');
